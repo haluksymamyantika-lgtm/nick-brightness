@@ -1,4 +1,5 @@
 {
+  "key.nickbrightness.menu": "Open nametag brightness menu",
   "key.nickbrightness.up": "Increase nametag brightness",
   "key.nickbrightness.down": "Decrease nametag brightness",
   "category.nickbrightness": "Nick Brightness"

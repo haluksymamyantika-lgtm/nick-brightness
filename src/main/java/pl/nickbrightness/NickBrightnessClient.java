@@ -14,6 +14,7 @@ import org.lwjgl.glfw.GLFW;
 
 public class NickBrightnessClient implements ClientModInitializer {
 	private static final int STEP = 10;
+	private static KeyBinding menuKey;
 	private static KeyBinding upKey;
 	private static KeyBinding downKey;
 
@@ -21,12 +22,20 @@ public class NickBrightnessClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		NickBrightnessConfig.load();
 
+		// Menu z suwakiem - domyślnie K, zmienisz w Ustawienia -> Sterowanie -> "Jasność nicków"
+		menuKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+				"key.nickbrightness.menu", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_K, "category.nickbrightness"));
 		upKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
 				"key.nickbrightness.up", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_BRACKET, "category.nickbrightness"));
 		downKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
 				"key.nickbrightness.down", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_BRACKET, "category.nickbrightness"));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
+			while (menuKey.wasPressed()) {
+				if (client.currentScreen == null) {
+					client.setScreen(new NickBrightnessScreen());
+				}
+			}
 			while (upKey.wasPressed()) change(client, +STEP);
 			while (downKey.wasPressed()) change(client, -STEP);
 		});
