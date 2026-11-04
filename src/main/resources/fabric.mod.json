@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "nickbrightness",
+  "version": "${version}",
+  "name": "Nick Brightness",
+  "description": "Pozwala zmieniać jasność nicków nad graczami. Nicki zostają normalne, zmienia się tylko ich jasność.",
+  "authors": ["you"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["pl.nickbrightness.NickBrightnessClient"]
+  },
+  "mixins": ["nickbrightness.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
